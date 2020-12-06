@@ -3,29 +3,10 @@
 
 const fs = require('fs')
 const md = require('markdown').markdown
-const minify = require('html-minifier').minify
 
 // config
 const cfg = require('./cfg.js')
-
-// get html first template
-const template = fs.readFileSync(`${cfg.meta_dir}/template.html`).toString()
-
-// compiles markdown to html
-function md2html(title, content) {
-	const options = {
-		collapseWhitespace: true,
-		minifyCSS: true
-	}
-
-	return minify(
-		template
-			.replace("{title}", title)
-			.replace("{author}", cfg.author)
-			.replace("{content}", md.toHTML(content)),
-		options
-	)
-}
+const meta = fs.readFileSync(`${cfg.posts_dir}/meta.template`).toString()
 
 // compiles posts
 function compile() {
@@ -38,8 +19,7 @@ function compile() {
 		const src = fs.readFileSync(path).toString()
 
 		// compile it
-		const title = name.substr(0, name.length - 3).split('-')[3]
-		const out = md2html(title, src)
+		const out = meta + md.toHTML(src)
 
 		// write file
 		const new_path = path.substr(0, path.length - 3) + '.html'
@@ -74,7 +54,7 @@ function index() {
 	let input = `# ${cfg.author}\n` + list
 
 	// compile list to html
-	const out = md2html(`${cfg.author}'s Blog`, input)
+	const out = meta + md.toHTML(input)
 
 	// print out to dist_dir/index.html
 	fs.writeFileSync(`${cfg.posts_dir}/index.html`, out)

@@ -1,0 +1,21 @@
+<meta name="viewport" content="initial-scale=1,width=device-width">
+<style>
+	body {
+		margin: 40px auto;
+		padding: 0 10px;
+		max-width: 650px;
+		line-height: 1.6;
+		font-size: 18px;
+		color: #444;
+		background: #eee;
+	}
+
+	h1, h2, h3 {
+		line-height: 1.2
+	}
+
+	h1 {
+		border-bottom: 3px solid #444;
+		text-align: center;
+	}
+</style>

@@ -10,7 +10,7 @@ and maybe touch to files in __meta/__ for styling and stuff.
 
 but first, you need to install the packages. i prefer yarn so:
 
-```sh
+```
 $ yarn
 ```
 
