@@ -1,0 +1,6 @@
+# compiled
+dist/
+
+# node
+node_modules/
+yarn.lock

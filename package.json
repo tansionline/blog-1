@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "html-minifier": "^4.0.0",
+    "markdown": "^0.5.0"
+  }
+}
