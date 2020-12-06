@@ -16,20 +16,26 @@ $ yarn
 
 then compile the posts into html:
 
-```sh
+```
 $ node bc
 ```
 
 then you can view the home page by:
 
-```sh
-$ firefox dist/index.html
+```
+$ firefox posts/index.html
 ```
 
 you can make a new post with:
 
-```sh
+```
 $ node np
+```
+
+and clear compiled files with
+
+```
+$ rm posts/*.html
 ```
 
 

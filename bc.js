@@ -30,9 +30,6 @@ function md2html(title, content) {
 // compiles posts
 function compile() {
 
-	// create the dist dir
-	fs.mkdirSync(cfg.dist_dir, { recursive: true })
-
 	// compile and write a file
 	async function compile_file(name) {
 
@@ -41,12 +38,11 @@ function compile() {
 		const src = fs.readFileSync(path).toString()
 
 		// compile it
-		const title =  name.substr(0, name.length - 3).split('-')[3]
+		const title = name.substr(0, name.length - 3).split('-')[3]
 		const out = md2html(title, src)
 
 		// write file
-		const new_name = name.substr(0, name.length - 3) + '.html'
-		const new_path = `${cfg.dist_dir}/${new_name}`
+		const new_path = path.substr(0, path.length - 3) + '.html'
 		fs.writeFileSync(new_path, out)
 
 	}
@@ -63,7 +59,7 @@ function compile() {
 function index() {
 
 	// get all .html fiels
-	const files = fs.readdirSync(cfg.dist_dir)
+	const files = fs.readdirSync(cfg.posts_dir)
 		.filter(name => name.endsWith('.html'))
 		.filter(name => name != 'index.html')
 		.reverse()
@@ -81,7 +77,7 @@ function index() {
 	const out = md2html(`${cfg.author}'s Blog`, input)
 
 	// print out to dist_dir/index.html
-	fs.writeFileSync(`${cfg.dist_dir}/index.html`, out)
+	fs.writeFileSync(`${cfg.posts_dir}/index.html`, out)
 
 }
 
