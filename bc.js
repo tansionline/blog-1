@@ -11,14 +11,20 @@ const cfg = require('./cfg.js')
 // get html first template
 const template = fs.readFileSync(`${cfg.meta_dir}/template.html`).toString()
 
-// minifies HTML
-function minifyHTML(html) {
+// compiles markdown to html
+function md2html(title, content) {
 	const options = {
 		collapseWhitespace: true,
 		minifyCSS: true
 	}
 
-	return minify(html, options)
+	return minify(
+		template
+			.replace("{title}", title)
+			.replace("{author}", cfg.author)
+			.replace("{content}", md.toHTML(content)),
+		options
+	)
 }
 
 // compiles posts
@@ -35,15 +41,13 @@ function compile() {
 		const src = fs.readFileSync(path).toString()
 
 		// compile it
-		const out = md.toHTML(src)
+		const title =  name.substr(0, name.length - 3).split('-')[3]
+		const out = md2html(title, src)
 
 		// write file
 		const new_name = name.substr(0, name.length - 3) + '.html'
 		const new_path = `${cfg.dist_dir}/${new_name}`
-		fs.writeFileSync(
-			new_path,
-			minifyHTML(template.replace('<>', out))
-		)
+		fs.writeFileSync(new_path, out)
 
 	}
 
@@ -65,20 +69,19 @@ function index() {
 		.reverse()
 
 	// compile them into a list
-	let list = []
-	for (f of files) {
-		const title = f.substr(0, f.length - 5).split('-')[3]
-		list.push(`- [${title}](${f})`)
-	}
+	const list = files
+		.map(f => f.substr(0, f.length - 5))
+		.map(f => `[${f}](${f}.html)`)
+		.join('\n\n')
+
+	// add author's name to top
+	let input = `# ${cfg.author}\n` + list
 
 	// compile list to html
-	const out = md.toHTML(list.join('\n'))
+	const out = md2html(`${cfg.author}'s Blog`, input)
 
 	// print out to dist_dir/index.html
-	fs.writeFileSync(
-		`${cfg.dist_dir}/index.html`,
-		minifyHTML(template.replace('<>', out))
-	)
+	fs.writeFileSync(`${cfg.dist_dir}/index.html`, out)
 
 }
 

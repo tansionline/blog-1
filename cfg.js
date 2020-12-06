@@ -3,7 +3,13 @@
 // own blog
 
 module.exports = {
+
+	// don't touch here
 	posts_dir: 'posts',
 	dist_dir:  'dist',
 	meta_dir:  'meta',
+
+	// user config
+	author: 'Flurach'
+
 }
