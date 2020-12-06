@@ -1,5 +1,5 @@
 # compiled
-dist/
+**.html
 
 # node
 node_modules/
