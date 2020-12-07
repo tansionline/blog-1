@@ -5,7 +5,7 @@ const fs = require('fs')
 const md = require('markdown').markdown
 
 // config
-const cfg = require('./cfg.js')
+const cfg = { posts_dir: 'posts', meta_dir: 'meta', author: 'Flurach' }
 const meta = fs.readFileSync(`${cfg.posts_dir}/meta.template`).toString()
 
 // compiles posts

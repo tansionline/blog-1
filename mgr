@@ -1,0 +1,25 @@
+#!/bin/sh
+
+case $1 in
+
+	# new
+	n)
+		printf "Post Title: "
+		read title
+
+		if [ -z $2 ]; then
+			touch "`date +'%Y-%m-%d'`-$title.md"
+		else
+			touch "$2/`date +'%Y-%m-%d'`-$title.md"
+		fi
+
+		echo "Created '$title'"
+		;;
+
+	# clean
+	c)
+		echo "Cleaning junk..."
+		find . -type f -name "**.html" -delete
+		;;
+
+esac
