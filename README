@@ -1,0 +1,35 @@
+# blog
+
+welcome to my blog. it doesn't have a link yet tho, let me show you around.
+
+
+## using
+
+this project can be used to make your own blog. first you need `marked` command available for this to work. then compile the posts into html:
+
+```
+$ ./mgr
+```
+
+you can make a new post with:
+
+```
+$ ./mgr n posts
+```
+
+and clear compiled posts with
+
+```
+$ ./mgr c
+```
+
+
+## bugs and feature requests
+
+this thing is so small it __mustn't__ have any bugs in it, besides i want to
+remove stuff not add so only the PR's that remove code will be considered.
+
+
+## philosophy
+
+it's unix, everybody got that already i assume.

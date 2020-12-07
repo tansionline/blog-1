@@ -10,6 +10,7 @@ case $1 in
 		if [ -z $2 ]; then
 			touch "`date +'%Y-%m-%d'`-$title.md"
 		else
+			mkdir -p $2
 			touch "$2/`date +'%Y-%m-%d'`-$title.md"
 		fi
 
