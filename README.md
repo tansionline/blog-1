@@ -29,13 +29,13 @@ $ firefox posts/index.html
 you can make a new post with:
 
 ```
-$ node np
+$ ./mgr n posts
 ```
 
 and clear compiled files with
 
 ```
-$ rm posts/*.html
+$ ./mgr c
 ```
 
 
