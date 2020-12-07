@@ -4,7 +4,7 @@ case $1 in
 
 	# new
 	n)
-		printf "Post Title: "
+		printf "post title: "
 		read title
 
 		if [ -z $2 ]; then
@@ -13,13 +13,24 @@ case $1 in
 			touch "$2/`date +'%Y-%m-%d'`-$title.md"
 		fi
 
-		echo "Created '$title'"
+		echo "created '$title'"
 		;;
 
 	# clean
 	c)
-		echo "Cleaning junk..."
+		echo "cleaning junk..."
 		find . -type f -name "**.html" -delete
+		;;
+
+	# compile
+	*)
+		echo "compiling posts..."
+		find . -type f -name "**.md" -exec bash -c\
+			'for f in "$@"; do\
+				marked $f -o ${f/%md/html};\
+				cat meta.template ${f/%md/html} > .tmp;\
+				mv .tmp ${f/%md/html};\
+			done' {} +
 		;;
 
 esac
